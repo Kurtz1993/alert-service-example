@@ -1,0 +1,58 @@
+$success: #009432;
+$warning: #f79f1f;
+$error: #ea2027;
+$info: #0652dd;
+
+:host {
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  font-family: sans-serif;
+  max-width: 90%;
+  min-width: 300px;
+  // border: 1px solid;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+
+  &.alert {
+    color: white;
+    box-shadow: 0px 1px 7px rgba(#000, 0.5);
+
+    &--success {
+      background-color: $success;
+      // border-color: darken($success, 6%);
+    }
+
+    &--error {
+      background-color: $error;
+      // border-color: darken($error, 6%);
+    }
+
+    &--warning {
+      background-color: $warning;
+      // border-color: darken($warning, 6%);
+    }
+
+    &--info {
+      background-color: $info;
+      // border-color: darken($info, 6%);
+    }
+  }
+}
+
+.alert {
+  &__message {
+    margin: 0;
+  }
+
+  &__close {
+    margin-left: 1rem;
+    font-size: 2rem;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    color: white;
+  }
+}
