@@ -1,5 +1,8 @@
 :host {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   top: 50px; // this is only for demo purposes as it leaves the button at the top
   left: 0;
   right: 0;
