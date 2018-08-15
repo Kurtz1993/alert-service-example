@@ -20,12 +20,12 @@ import { Alert } from 'src/app/shared/models/alert.model';
 export class AlertsContainerComponent implements OnInit {
   @ViewChild('alertsContainer', { read: ViewContainerRef })
   container: ViewContainerRef;
-  currentAlerts: Alert[] = [];
-
   @HostBinding('class.hidden')
   get isHidden(): boolean {
     return !this.currentAlerts.length;
   }
+
+  currentAlerts: Alert[] = [];
 
   private factory: ComponentFactory<AlertComponent>;
 
@@ -40,18 +40,18 @@ export class AlertsContainerComponent implements OnInit {
 
   createAlert(alert: Alert): void {
     this.currentAlerts = [...this.currentAlerts, alert];
-    const alertId = this.currentAlerts.length - 1;
+    alert.id = this.currentAlerts.length - 1;
     const componentRef: ComponentRef<AlertComponent> = this.container.createComponent(
       this.factory,
-      alert ? alertId : 0
+      alert.id
     );
 
     componentRef.instance.alertInformation = alert;
-    componentRef.instance.id = alertId;
     componentRef.instance.close.subscribe(this.deleteAlert.bind(this));
   }
 
   deleteAlert(id: number): void {
     this.container.remove(id);
+    this.currentAlerts = this.currentAlerts.filter(alert => alert.id !== id);
   }
 }
