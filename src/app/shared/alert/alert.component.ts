@@ -10,13 +10,10 @@ export class AlertComponent {
   @Input()
   alertInformation: Alert;
 
-  @Input()
-  id: number;
-
   @Output()
   close = new EventEmitter<number>();
 
   closeAlert() {
-    this.close.emit(this.id);
+    this.close.emit(this.alertInformation.id);
   }
 }
