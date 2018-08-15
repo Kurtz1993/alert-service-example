@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AlertContainerComponent } from './alert-container/alert-container.component';
+import { AlertsContainerComponent } from './alerts-container/alerts-container.component';
 import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [AlertContainerComponent, AlertComponent],
-  exports: [AlertContainerComponent],
+  declarations: [AlertsContainerComponent, AlertComponent],
+  exports: [AlertsContainerComponent],
   entryComponents: [AlertComponent]
 })
 export class SharedModule { }

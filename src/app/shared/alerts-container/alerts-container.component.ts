@@ -13,11 +13,11 @@ import { AlertService } from '../../core/alert.service';
 import { Alert } from 'src/app/shared/models/alert.model';
 
 @Component({
-  selector: 'app-alert-container',
-  templateUrl: './alert-container.component.html',
-  styleUrls: ['./alert-container.component.scss'],
+  selector: 'app-alerts-container',
+  templateUrl: './alerts-container.component.html',
+  styleUrls: ['./alerts-container.component.scss'],
 })
-export class AlertContainerComponent implements OnInit {
+export class AlertsContainerComponent implements OnInit {
   @ViewChild('alertsContainer', { read: ViewContainerRef })
   container: ViewContainerRef;
   currentAlerts: Alert[] = [];
