@@ -11,7 +11,7 @@ export class AppComponent {
 
   constructor(private alertService: AlertService) {}
 
-  createAlert(): void {
-    this.alertService.showAlert({ message: 'hello!!!', type: 'success' });
+  createAlert(message: string, type: 'success' | 'error' | 'warning' | 'info'): void {
+    this.alertService.showAlert({ message, type });
   }
 }

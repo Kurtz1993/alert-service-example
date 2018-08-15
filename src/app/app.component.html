@@ -1,3 +1,6 @@
 <app-alerts-container></app-alerts-container>
 
-<button (click)="createAlert()">Add alert</button>
+<button (click)="createAlert('I am a success message', 'success')">Add success alert</button>
+<button (click)="createAlert('I am a warning message', 'warning')">Add warning alert</button>
+<button (click)="createAlert('I am a info message', 'info')">Add info alert</button>
+<button (click)="createAlert('I am a error message', 'error')">Add error alert</button>
