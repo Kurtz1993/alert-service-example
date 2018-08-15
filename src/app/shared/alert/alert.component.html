@@ -1,5 +1,6 @@
-<p>
-  {{ alertInformation.message + alertInformation.id }}
-
-  <button (click)="closeAlert()">Close</button>
+<p class="alert__message">
+  {{ alertInformation.message }}
 </p>
+<button class="alert__close"
+  (click)="closeAlert()"
+  aria-label="Close alert">&times;</button>
