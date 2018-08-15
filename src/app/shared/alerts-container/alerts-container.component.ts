@@ -7,10 +7,12 @@ import {
   ComponentFactory,
   ComponentRef,
   HostBinding,
+  ViewRef,
 } from '@angular/core';
+
 import { AlertComponent } from '../alert/alert.component';
-import { AlertService } from '../../core/alert.service';
-import { Alert } from 'src/app/shared/models/alert.model';
+import { AlertService } from '@app/core/alert.service';
+import { Alert } from '@app/shared/models/alert.model';
 
 @Component({
   selector: 'app-alerts-container',
@@ -22,12 +24,12 @@ export class AlertsContainerComponent implements OnInit {
   container: ViewContainerRef;
   @HostBinding('class.hidden')
   get isHidden(): boolean {
-    return !this.currentAlerts.length;
+    return !this.viewRefs.size;
   }
 
-  currentAlerts: Alert[] = [];
-
   private factory: ComponentFactory<AlertComponent>;
+  private viewRefs: Map<number, ViewRef> = new Map();
+  private idCounter = 0;
 
   constructor(private resolver: ComponentFactoryResolver, private alertService: AlertService) {}
 
@@ -39,19 +41,20 @@ export class AlertsContainerComponent implements OnInit {
   }
 
   createAlert(alert: Alert): void {
-    this.currentAlerts = [...this.currentAlerts, alert];
-    alert.id = this.currentAlerts.length - 1;
+    alert.id = this.idCounter++;
     const componentRef: ComponentRef<AlertComponent> = this.container.createComponent(
       this.factory,
-      alert.id
+      this.viewRefs.size
     );
 
     componentRef.instance.alertInformation = alert;
     componentRef.instance.close.subscribe(this.deleteAlert.bind(this));
+    this.viewRefs.set(alert.id, componentRef.hostView);
   }
 
   deleteAlert(id: number): void {
-    this.container.remove(id);
-    this.currentAlerts = this.currentAlerts.filter(alert => alert.id !== id);
+    const viewIndex = this.container.indexOf(this.viewRefs.get(id));
+    this.container.remove(viewIndex);
+    this.viewRefs.delete(id);
   }
 }
