@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, queueScheduler } from 'rxjs';
+import { observeOn } from 'rxjs/operators';
+
 import { Alert } from '../shared/models/alert.model';
 
 @Injectable({
@@ -14,7 +16,7 @@ export class AlertService {
 
   constructor() {
     this.alertsSubject = new Subject();
-    this.alerts$ = this.alertsSubject.asObservable();
+    this.alerts$ = this.alertsSubject.asObservable().pipe(observeOn(queueScheduler));
     this.defaultConfig = {
       message: '',
       type: 'success',
