@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, Input, HostBinding, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
 import { Alert } from '../models/alert.model';
 
 @Component({
@@ -19,6 +20,10 @@ export class AlertComponent implements OnInit {
   }
 
   closeAlert() {
-    this.close.emit(this.alertInformation.id);
+    this.componentClasses += ' alert--closing';
+    timer(500).subscribe(() => {
+    }, null, () =>{
+      this.close.emit(this.alertInformation.id);
+    });
   }
 }
