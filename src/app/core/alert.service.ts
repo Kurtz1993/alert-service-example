@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable, queueScheduler } from 'rxjs';
 import { observeOn } from 'rxjs/operators';
 
-import { Alert } from '../shared/models/alert.model';
+import { AlertConfig } from '../shared/models/alert.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AlertService {
-  alerts$: Observable<Alert>;
+  alerts$: Observable<AlertConfig>;
 
-  private defaultConfig: Alert;
-  private alertsSubject: Subject<Alert>;
+  private defaultConfig: AlertConfig;
+  private alertsSubject: Subject<AlertConfig>;
 
   constructor() {
     this.alertsSubject = new Subject();
@@ -25,7 +25,7 @@ export class AlertService {
     };
   }
 
-  showAlert(config: Alert): void {
+  showAlert(config: AlertConfig): void {
     const alert = Object.assign({}, this.defaultConfig, config);
     this.alertsSubject.next(alert);
   }

@@ -1,12 +1,12 @@
 <div class="alert__container">
   <p class="alert__message">
-    {{ alertInformation.message }}
+    {{ config.message }}
   </p>
   <button class="alert__close" (click)="closeAlert()" aria-label="Close alert">&times;</button>
 </div>
 
 <div
-  *ngIf="alertInformation.timeout"
+  *ngIf="config.timeout"
   class="progressbar"
   [ngStyle]="{ animationDuration: animationDuration, animationPlayState: 'running' }"
 ></div>

@@ -12,7 +12,7 @@ import {
 
 import { AlertComponent } from '../alert/alert.component';
 import { AlertService } from '@app/core/alert.service';
-import { Alert } from '@app/shared/models/alert.model';
+import { AlertConfig } from '@app/shared/models/alert.model';
 
 @Component({
   selector: 'app-alerts-container',
@@ -40,14 +40,14 @@ export class AlertsContainerComponent implements OnInit {
     this.alertService.alerts$.subscribe(this.createAlert.bind(this));
   }
 
-  createAlert(alert: Alert): void {
+  createAlert(alert: AlertConfig): void {
     alert.id = this.idCounter++;
     const componentRef: ComponentRef<AlertComponent> = this.container.createComponent(
       this.factory,
       this.viewRefs.size
     );
 
-    componentRef.instance.alertInformation = alert;
+    componentRef.instance.config = alert;
     componentRef.instance.close.subscribe(this.deleteAlert.bind(this));
     this.viewRefs.set(alert.id, componentRef.hostView);
   }
