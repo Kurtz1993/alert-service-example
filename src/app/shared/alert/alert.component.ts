@@ -15,14 +15,23 @@ export class AlertComponent implements OnInit {
   @HostBinding('class')
   componentClasses: string;
 
+  get animationDuration(): string {
+    return `${this.alertInformation.timeout}ms`;
+  }
+
   ngOnInit() {
     this.componentClasses = `alert alert--${this.alertInformation.type}`;
+
+    if (this.alertInformation.timeout) {
+      timer(this.alertInformation.timeout).subscribe(null, null, () => {
+        this.closeAlert();
+      });
+    }
   }
 
   closeAlert() {
     this.componentClasses += ' alert--closing';
-    timer(500).subscribe(() => {
-    }, null, () =>{
+    timer(500).subscribe(() => {}, null, () => {
       this.close.emit(this.alertInformation.id);
     });
   }
