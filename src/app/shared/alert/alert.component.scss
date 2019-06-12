@@ -2,18 +2,15 @@ $success: #009432;
 $warning: #f79f1f;
 $error: #ea2027;
 $info: #0652dd;
+$alert-border-radius: 4px;
 
 :host {
-  padding: 0.5rem 1rem;
   font-size: 1.1rem;
   font-family: sans-serif;
   max-width: 90%;
   min-width: 300px;
   // border: 1px solid;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: $alert-border-radius;
   margin-bottom: 0.8rem;
   transition: all 0.5s;
 
@@ -23,21 +20,33 @@ $info: #0652dd;
 
     &--success {
       background-color: $success;
+      .progressbar {
+        background-color: darken($success, 10%);
+      }
       // border-color: darken($success, 6%);
     }
 
     &--error {
       background-color: $error;
+      .progressbar {
+        background-color: darken($error, 10%);
+      }
       // border-color: darken($error, 6%);
     }
 
     &--warning {
       background-color: $warning;
+      .progressbar {
+        background-color: darken($warning, 10%);
+      }
       // border-color: darken($warning, 6%);
     }
 
     &--info {
       background-color: $info;
+      .progressbar {
+        background-color: darken($info, 10%);
+      }
       // border-color: darken($info, 6%);
     }
 
@@ -48,6 +57,13 @@ $info: #0652dd;
 }
 
 .alert {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+  }
+
   &__message {
     margin: 0;
   }
@@ -59,5 +75,30 @@ $info: #0652dd;
     background-color: transparent;
     cursor: pointer;
     color: white;
+  }
+}
+
+.progressbar {
+  height: 5px;
+  animation: progressbar-countdown;
+  /* Placeholder, this will be updated using javascript */
+  animation-duration: 40s;
+  /* We stop in the end */
+  animation-iteration-count: 1;
+  /* Stay on pause when the animation is finished finished */
+  animation-fill-mode: forwards;
+  /* We start paused, we start the animation using javascript */
+  animation-play-state: paused;
+  /* We want a linear animation, ease-out is standard */
+  animation-timing-function: linear;
+  border-radius: 0 0 $alert-border-radius $alert-border-radius;
+}
+
+@keyframes progressbar-countdown {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
   }
 }
