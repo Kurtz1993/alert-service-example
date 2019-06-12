@@ -1,6 +1,12 @@
-<p class="alert__message">
-  {{ alertInformation.message }}
-</p>
-<button class="alert__close"
-  (click)="closeAlert()"
-  aria-label="Close alert">&times;</button>
+<div class="alert__container">
+  <p class="alert__message">
+    {{ alertInformation.message }}
+  </p>
+  <button class="alert__close" (click)="closeAlert()" aria-label="Close alert">&times;</button>
+</div>
+
+<div
+  *ngIf="alertInformation.timeout"
+  class="progressbar"
+  [ngStyle]="{ animationDuration: animationDuration, animationPlayState: 'running' }"
+></div>
